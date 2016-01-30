@@ -2,7 +2,6 @@ package com.holypoly.ggj.system;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector2;
 import com.holypoly.ggj.component.BeaconComponent;
 import com.holypoly.ggj.component.PlayerComponent;

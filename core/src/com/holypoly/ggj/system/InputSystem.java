@@ -52,8 +52,9 @@ public class InputSystem extends AbstractSystem implements ControllerListener{
             switch(inputDevices[i]) {
                 case LEFT_KEYBOARD:
                     inputStates[i].accel = Gdx.input.isKeyPressed(Keys.W);
-                    inputStates[i].turn += (Gdx.input.isKeyPressed(Keys.A)?1:-1);
-                    inputStates[i].turn += (Gdx.input.isKeyPressed(Keys.D)?-1:1);
+                    inputStates[i].turn = 0;
+                    inputStates[i].turn += (Gdx.input.isKeyPressed(Keys.A)?1:0);
+                    inputStates[i].turn += (Gdx.input.isKeyPressed(Keys.D)?-1:0);
                     inputStates[i].shoot = Gdx.input.isKeyPressed(Keys.SPACE);
                     break;
                 case RIGHT_KEYBOARD:

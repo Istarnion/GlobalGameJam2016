@@ -13,4 +13,8 @@ public class InputState {
     public boolean accel;
 
 
+    @Override
+    public String toString(){
+    	return turn + ", " + shoot +", " + accel;
+    }
 }

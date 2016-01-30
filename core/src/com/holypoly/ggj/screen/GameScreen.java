@@ -6,6 +6,7 @@ import com.holypoly.ggj.system.AbstractSystem;
 import com.holypoly.ggj.system.GraphicsSystem;
 import com.holypoly.ggj.system.InputSystem;
 import com.holypoly.ggj.system.PhysicsSystem;
+import com.holypoly.ggj.system.PlayerSystem;
 
 /**
  *
@@ -17,12 +18,15 @@ public class GameScreen extends AbstractScreen {
     public final int
             INPUT = 0,
             GFX = 1,
-            PHYS = 2;
+            PHYS = 2,
+            PLAYER = 3;
+    		
 
     public AbstractSystem[] systems = {
         new InputSystem(this),
         new GraphicsSystem(this),
-        new PhysicsSystem(this)
+        new PhysicsSystem(this),
+        new PlayerSystem(this)
     };
 
     public EntityFactory entityFactory;

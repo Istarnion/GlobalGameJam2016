@@ -54,7 +54,8 @@ public class PhysicsSystem extends AbstractSystem {
         components.put(comp.entityID, comp);
 
         Body b = world.createBody(comp.bodyDef);
-
+        b.setAngularDamping(0.95f);
+        b.setLinearDamping(0.85f);
         FixtureDef fixtureDef = new FixtureDef();
 
         Shape shape = null;
@@ -77,6 +78,10 @@ public class PhysicsSystem extends AbstractSystem {
         bodies.put(comp.entityID, b);
 
         shape.dispose();
+    }
+    
+    public Body getBody(int entityID){
+    	return bodies.get(entityID);
     }
 
     public Vector2 getEntityPos(int entity) {

@@ -18,8 +18,9 @@ public class PhysicsComponent extends Component {
 
     public float radius, width, height;
 
-    public PhysicsComponent(float x, float y, BodyType type, float radius) {
-        bodyDef = new BodyDef();
+    public PhysicsComponent(int entityID, float x, float y, BodyType type, float radius) {
+        super(entityID);
+    	bodyDef = new BodyDef();
         bodyDef.type = type;
 
         bodyDef.position.set(x, y);
@@ -28,8 +29,9 @@ public class PhysicsComponent extends Component {
         this.shape = Shape.CIRCLE;
     }
 
-    public PhysicsComponent(float x, float y, BodyType type, float width, float height) {
-        bodyDef = new BodyDef();
+    public PhysicsComponent(int entityID, float x, float y, BodyType type, float width, float height) {
+    	super(entityID);
+    	bodyDef = new BodyDef();
         bodyDef.type = type;
 
         bodyDef.position.set(x, y);

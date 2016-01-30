@@ -6,8 +6,8 @@ package com.holypoly.ggj.component;
  */
 public class AnimationComponent extends Component {
 
-    public AnimationComponent(int entity) {
-        
+    public AnimationComponent(int entityID) {
+        super(entityID);
     }
 
 }
