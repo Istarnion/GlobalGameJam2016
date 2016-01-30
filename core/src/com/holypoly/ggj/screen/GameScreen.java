@@ -29,7 +29,7 @@ public class GameScreen extends AbstractScreen {
 
         entityFactory = new EntityFactory(this);
 
-        entityFactory.makeTest();
+        entityFactory.makeTest(0, 0);
     }
 
     @Override
