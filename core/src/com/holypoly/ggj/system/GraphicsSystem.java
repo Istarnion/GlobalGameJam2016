@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -34,7 +36,15 @@ public class GraphicsSystem extends AbstractSystem implements Disposable {
     private Box2DDebugRenderer debugRenderer;
 
     private Texture pentagram;
-
+    
+    private static final int FRAME_COLS = 9;
+    private static final int FRAME_ROWS = 6;
+    
+    public Animation beaconAni;
+    public Texture beaconSheet;
+    public TextureRegion[] beaconFrames;
+    public TextureRegion currentFrame;
+    
     public GraphicsSystem(GameScreen game) {
         super(game);
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -51,6 +61,7 @@ public class GraphicsSystem extends AbstractSystem implements Disposable {
         viewport = new FitViewport(20, 22.5f, cameras[0]);
 
         pentagram = new Texture("images/pentagram.png");
+        
     }
 
     @Override
@@ -65,6 +76,7 @@ public class GraphicsSystem extends AbstractSystem implements Disposable {
         spriteBatch.begin();
         {
             spriteBatch.draw(pentagram, -50, -50, 100, 100);
+            //Draw animation for beacon --->
         }
         spriteBatch.end();
 
