@@ -7,7 +7,10 @@ public class Main extends Game {
 
 	@Override
 	public void create () {
-		super.setScreen(new GameScreen(this));
+        GameScreen gs = new GameScreen(this);
+        while(!gs.assets.update());
+
+		super.setScreen(gs);
 	}
 
 	@Override

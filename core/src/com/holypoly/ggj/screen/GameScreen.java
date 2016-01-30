@@ -1,5 +1,7 @@
 package com.holypoly.ggj.screen;
 
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.IntArray;
 import com.holypoly.ggj.EntityFactory;
 import com.holypoly.ggj.Main;
@@ -27,14 +29,9 @@ public class GameScreen extends AbstractScreen {
             CAMERA = 5;
 
 
-    public AbstractSystem[] systems = {
-        new InputSystem(this),
-        new GraphicsSystem(this),
-        new PhysicsSystem(this),
-        new PlayerSystem(this),
-        new BeaconSystem(this),
-        new CameraSystem(this)
-    };
+    public AbstractSystem[] systems;
+
+    public AssetManager assets;
 
     public EntityFactory entityFactory;
 
@@ -43,18 +40,29 @@ public class GameScreen extends AbstractScreen {
     public GameScreen(Main main) {
         super(main);
 
-        entityFactory = new EntityFactory(this);
+        assets = new AssetManager();
+        assets.load("images/pentagram.png", Texture.class);
+        assets.load("images/spritesheet.png", Texture.class);
 
         players = new IntArray(4);
-
-        players.add(entityFactory.makeTest(0, 0));
-        entityFactory.makeCamera(players.get(0), 0);
-        entityFactory.makeBeacon(0, 50);
     }
 
     @Override
     public void show() {
-        System.out.println("show");
+        systems = new AbstractSystem[]{
+            new InputSystem(this),
+            new GraphicsSystem(this),
+            new PhysicsSystem(this),
+            new PlayerSystem(this),
+            new BeaconSystem(this),
+            new CameraSystem(this)
+        };
+
+        entityFactory = new EntityFactory(this);
+
+        players.add(entityFactory.makeTest(0, 0));
+        entityFactory.makeCamera(players.get(0), 0);
+        entityFactory.makeBeacon(0, 50);
     }
 
     @Override

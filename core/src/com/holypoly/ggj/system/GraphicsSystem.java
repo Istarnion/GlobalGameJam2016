@@ -36,15 +36,15 @@ public class GraphicsSystem extends AbstractSystem implements Disposable {
     private Box2DDebugRenderer debugRenderer;
 
     private Texture pentagram;
-    
+
     private static final int FRAME_COLS = 9;
     private static final int FRAME_ROWS = 6;
-    
+
     public Animation beaconAni;
     public Texture beaconSheet;
     public TextureRegion[] beaconFrames;
     public TextureRegion currentFrame;
-    
+
     public GraphicsSystem(GameScreen game) {
         super(game);
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -60,8 +60,8 @@ public class GraphicsSystem extends AbstractSystem implements Disposable {
         cameras[0] = new OrthographicCamera(8, 9);
         viewport = new FitViewport(20, 22.5f, cameras[0]);
 
-        pentagram = new Texture("images/pentagram.png");
-        
+        pentagram = game.assets.get("images/pentagram.png");
+
     }
 
     @Override

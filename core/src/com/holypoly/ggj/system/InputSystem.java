@@ -1,7 +1,6 @@
 package com.holypoly.ggj.system;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.PovDirection;
@@ -51,16 +50,18 @@ public class InputSystem extends AbstractSystem implements ControllerListener{
         for(int i=0; i<inputDevices.length; i++) {
             switch(inputDevices[i]) {
                 case LEFT_KEYBOARD:
-                    inputStates[i].accel = Gdx.input.isKeyPressed(Keys.W);
+                    inputStates[i].accel = Gdx.input.isKeyPressed(left.accel);
                     inputStates[i].turn = 0;
-                    inputStates[i].turn += (Gdx.input.isKeyPressed(Keys.A)?1:0);
-                    inputStates[i].turn += (Gdx.input.isKeyPressed(Keys.D)?-1:0);
-                    inputStates[i].shoot = Gdx.input.isKeyPressed(Keys.SPACE);
+                    inputStates[i].turn += (Gdx.input.isKeyPressed(left.turnLeft)?1:0);
+                    inputStates[i].turn += (Gdx.input.isKeyPressed(left.turnRight)?-1:0);
+                    inputStates[i].shoot = Gdx.input.isKeyPressed(left.fire);
                     break;
                 case RIGHT_KEYBOARD:
-                    for(int j=0; j<left.keys.length; j++) {
-
-                    }
+                    inputStates[i].accel = Gdx.input.isKeyPressed(right.accel);
+                    inputStates[i].turn = 0;
+                    inputStates[i].turn += (Gdx.input.isKeyPressed(right.turnLeft)?1:0);
+                    inputStates[i].turn += (Gdx.input.isKeyPressed(right.turnRight)?-1:0);
+                    inputStates[i].shoot = Gdx.input.isKeyPressed(right.fire);
                     break;
                 default:
                     // TODO: Add controller support

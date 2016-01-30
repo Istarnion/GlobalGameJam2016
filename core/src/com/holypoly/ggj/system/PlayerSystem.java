@@ -31,9 +31,11 @@ public class PlayerSystem extends AbstractSystem {
 
 	@Override
 	public void update(float delta) {
+        int playerNumber = 0;
 		for(PlayerComponent p : pc){
-			InputState is = ((InputSystem)game.systems[game.INPUT]).inputStates[0];
-            
+
+			InputState is = ((InputSystem)game.systems[game.INPUT]).inputStates[playerNumber];
+
 			Body b = game.getPhysicsSystem().getBody(p.entityID);
 			b.applyTorque(is.turn*delta*rotationSpeed, true);
 			if(Math.abs(b.getAngularVelocity()) > maxAngVel){
@@ -52,9 +54,8 @@ public class PlayerSystem extends AbstractSystem {
 			if(v2.len() > maxSpeed){
 				b.setLinearVelocity(v2.setLength(maxSpeed));
 			}
+
+            playerNumber++;
 		}
-
 	}
-
-
 }
