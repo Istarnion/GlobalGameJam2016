@@ -1,5 +1,6 @@
 package com.holypoly.ggj.screen;
 
+import com.badlogic.gdx.utils.IntArray;
 import com.holypoly.ggj.EntityFactory;
 import com.holypoly.ggj.Main;
 import com.holypoly.ggj.system.AbstractSystem;
@@ -37,13 +38,18 @@ public class GameScreen extends AbstractScreen {
 
     public EntityFactory entityFactory;
 
+    public IntArray players;
+
     public GameScreen(Main main) {
         super(main);
 
         entityFactory = new EntityFactory(this);
 
-        int testID = entityFactory.makeTest(0, 0);
-        entityFactory.makeCamera(testID, 0);
+        players = new IntArray(4);
+
+        players.add(entityFactory.makeTest(0, 0));
+        entityFactory.makeCamera(players.get(0), 0);
+        entityFactory.makeBeacon(0, 50);
     }
 
     @Override

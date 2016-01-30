@@ -8,6 +8,6 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.resizable = false;
-		new LwjglApplication(new Main(), config);
+        new LwjglApplication(new Main(), config);
 	}
 }
