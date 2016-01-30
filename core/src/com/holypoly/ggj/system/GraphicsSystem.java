@@ -23,7 +23,7 @@ public class GraphicsSystem extends AbstractSystem implements Disposable {
 
     public List<AnimationComponent> animations;
 
-    private OrthographicCamera cam;
+    public OrthographicCamera[] cameras;
 
     private FitViewport viewport;
 
@@ -45,8 +45,10 @@ public class GraphicsSystem extends AbstractSystem implements Disposable {
         shapeRenderer = new ShapeRenderer();
         debugRenderer = new Box2DDebugRenderer();
 
-        cam = new OrthographicCamera(8, 9);
-        viewport = new FitViewport(20, 22.5f, cam);
+        cameras = new OrthographicCamera[1];
+
+        cameras[0] = new OrthographicCamera(8, 9);
+        viewport = new FitViewport(20, 22.5f, cameras[0]);
 
         pentagram = new Texture("images/pentagram.png");
     }
@@ -55,14 +57,18 @@ public class GraphicsSystem extends AbstractSystem implements Disposable {
     public void update(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        spriteBatch.setProjectionMatrix(cam.combined);
+        for(OrthographicCamera cam : cameras) {
+            if(cam != null) cam.update();
+        }
+
+        spriteBatch.setProjectionMatrix(cameras[0].combined);
         spriteBatch.begin();
         {
-            spriteBatch.draw(pentagram, -10, -10, 20, 20);
+            spriteBatch.draw(pentagram, -50, -50, 100, 100);
         }
         spriteBatch.end();
 
-        shapeRenderer.setProjectionMatrix(cam.combined);
+        shapeRenderer.setProjectionMatrix(cameras[0].combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         {
             Vector2 drawPos = null;
@@ -82,7 +88,7 @@ public class GraphicsSystem extends AbstractSystem implements Disposable {
         }
         shapeRenderer.end();
 
-        debugRenderer.render(game.getPhysicsSystem().getWorld(), cam.combined);
+        debugRenderer.render(game.getPhysicsSystem().getWorld(), cameras[0].combined);
     }
 
     public void resize(int width, int height) {

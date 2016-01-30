@@ -3,6 +3,8 @@ package com.holypoly.ggj.screen;
 import com.holypoly.ggj.EntityFactory;
 import com.holypoly.ggj.Main;
 import com.holypoly.ggj.system.AbstractSystem;
+import com.holypoly.ggj.system.BeaconSystem;
+import com.holypoly.ggj.system.CameraSystem;
 import com.holypoly.ggj.system.GraphicsSystem;
 import com.holypoly.ggj.system.InputSystem;
 import com.holypoly.ggj.system.PhysicsSystem;
@@ -19,14 +21,18 @@ public class GameScreen extends AbstractScreen {
             INPUT = 0,
             GFX = 1,
             PHYS = 2,
-            PLAYER = 3;
-    		
+            PLAYER = 3,
+            BEACON = 4,
+            CAMERA = 5;
+
 
     public AbstractSystem[] systems = {
         new InputSystem(this),
         new GraphicsSystem(this),
         new PhysicsSystem(this),
-        new PlayerSystem(this)
+        new PlayerSystem(this),
+        new BeaconSystem(this),
+        new CameraSystem(this)
     };
 
     public EntityFactory entityFactory;
@@ -36,7 +42,8 @@ public class GameScreen extends AbstractScreen {
 
         entityFactory = new EntityFactory(this);
 
-        entityFactory.makeTest(0, 0);
+        int testID = entityFactory.makeTest(0, 0);
+        entityFactory.makeCamera(testID, 0);
     }
 
     @Override
