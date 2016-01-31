@@ -1,5 +1,6 @@
 package com.holypoly.ggj.system;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -63,6 +64,7 @@ public class PlayerSystem extends AbstractSystem {
 
                 v.add(v2);
                 game.entityFactory.makeMissile(v.x, v.y, v2.nor());
+                ((Sound) game.assets.get("sounds/Spell1.mp3")).play(0.2f);
                 p.cooldown = p.delay;
             }
             p.cooldown -= delta;

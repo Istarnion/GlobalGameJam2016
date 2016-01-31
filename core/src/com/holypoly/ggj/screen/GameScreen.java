@@ -1,6 +1,7 @@
 package com.holypoly.ggj.screen;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.IntArray;
@@ -53,6 +54,8 @@ public class GameScreen extends AbstractScreen {
         assets.load("images/purplewitch.png", Texture.class);
         assets.load("images/yellowwitch.png", Texture.class);
         assets.load("images/magicmissile.png", Texture.class);
+        assets.load("sounds/Fire.mp3", Sound.class);
+        assets.load("sounds/Spell1.mp3", Sound.class);
 
         players = new IntArray(4);
     }
