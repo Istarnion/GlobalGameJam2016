@@ -1,7 +1,10 @@
 package com.holypoly.ggj.screen;
 
 import box2dLight.RayHandler;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -59,6 +62,7 @@ public class GameScreen extends AbstractScreen {
         assets.load("images/magicmissile.png", Texture.class);
         assets.load("sounds/Fire.mp3", Sound.class);
         assets.load("sounds/Spell1.mp3", Sound.class);
+        assets.load("sounds/music.mp3", Music.class);
 
         players = new IntArray(4);
     }
@@ -88,6 +92,10 @@ public class GameScreen extends AbstractScreen {
         entityFactory.makeBeacon(-48, 15.9f);
         entityFactory.makeBeacon(32f, -38.5f);
         entityFactory.makeBeacon(-32f, -38.5f);
+        
+        Music music = assets.get("sounds/music.mp3");
+        music.setLooping(true);
+        music.play();
     }
 
     @Override
