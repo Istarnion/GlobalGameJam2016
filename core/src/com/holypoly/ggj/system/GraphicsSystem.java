@@ -5,10 +5,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.holypoly.ggj.component.AnimationComponent;
 import com.holypoly.ggj.screen.GameScreen;
@@ -25,50 +23,56 @@ public class GraphicsSystem extends AbstractSystem {
 
     public OrthographicCamera[] cameras;
 
+    private OrthographicCamera hudCam;
+    
+    private FitViewport hudViewport;
+    
     private FitViewport viewportLeft, viewportRight;
 
     private SpriteBatch spriteBatch;
 
-    private ShapeRenderer shapeRenderer;
-
-    private Box2DDebugRenderer debugRenderer;
+    private SpriteBatch hudBatch;
 
     private Texture pentagram;
     
     private Texture background;
+    
+    private Texture overlay;
 
     public GraphicsSystem(GameScreen game) {
         super(game);
         Gdx.gl.glClearColor(0, 0, 0, 1);
 
-        
-        
         animations = new ArrayList<AnimationComponent>();
 
         spriteBatch = new SpriteBatch();
-        shapeRenderer = new ShapeRenderer();
-        debugRenderer = new Box2DDebugRenderer();
-
+        hudBatch = new SpriteBatch();
+        hudCam = new OrthographicCamera(8, 9);
+        
         cameras = new OrthographicCamera[2];
-
+        
         cameras[0] = new OrthographicCamera(8, 9);
         cameras[1] = new OrthographicCamera(8, 9);
         viewportLeft = new FitViewport(20, 22.5f, cameras[0]);
         viewportRight = new FitViewport(20, 22.5f, cameras[1]);
 
+        hudViewport = new FitViewport(20, 22.5f, hudCam);
+        
+        
         background = game.assets.get("images/bg.png");
         pentagram = game.assets.get("images/pentagram.png");
-
+        overlay = game.assets.get("images/overlay.png");
     }
 
     @Override
     public void update(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         
-        
         for(OrthographicCamera cam : cameras) {
             if(cam != null) cam.update();
         }
+        
+        Gdx.gl.glViewport(Gdx.graphics.getWidth()/2, 0, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
         
         spriteBatch.setProjectionMatrix(cameras[0].combined);
         spriteBatch.begin();
@@ -97,8 +101,16 @@ public class GraphicsSystem extends AbstractSystem {
             }
         }
         spriteBatch.end();
+        hudBatch.setProjectionMatrix(hudCam.combined);
+        hudBatch.begin();
+        {
+            hudBatch.draw(
+                    overlay,
+                    10, -11.25f, -20, 22.5f);
+        }
+        hudBatch.end();
 
-        Gdx.gl.glViewport(Gdx.graphics.getWidth()/2, 0, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
+        Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
         
         spriteBatch.setProjectionMatrix(cameras[1].combined);
         spriteBatch.begin();
@@ -127,13 +139,21 @@ public class GraphicsSystem extends AbstractSystem {
             }
         }
         spriteBatch.end();
-
-        //debugRenderer.render(game.getPhysicsSystem().getWorld(), cameras[0].combined);
+        hudBatch.setProjectionMatrix(hudCam.combined);
+        hudBatch.begin();
+        {
+            hudBatch.draw(
+                    overlay,
+                    -10, -11.25f, 20, 22.5f);
+        }
+        hudBatch.end();
+        
     }
 
     public void resize(int width, int height) {
         viewportLeft.update(width, height);
         viewportRight.update(width, height);
+        hudViewport.update(width, height);
     }
     
     public AnimationComponent getComponent(int entityId) {

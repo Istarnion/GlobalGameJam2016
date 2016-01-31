@@ -42,6 +42,7 @@ public class GameScreen extends AbstractScreen {
 
         assets = new AssetManager();
         assets.load("images/bg.png", Texture.class);
+        assets.load("images/overlay.png", Texture.class);
         assets.load("images/pentagram.png", Texture.class);
         assets.load("images/spritesheet.png", Texture.class);
         assets.load("images/purplewitch.png", Texture.class);
@@ -63,8 +64,8 @@ public class GameScreen extends AbstractScreen {
 
         entityFactory = new EntityFactory(this);
 
-        players.add(entityFactory.makePlayer(-10, 0, true));
-        players.add(entityFactory.makePlayer(10, 0, false));
+        players.add(entityFactory.makePlayer(10, 0, true));
+        players.add(entityFactory.makePlayer(-10, 0, false));
         
         entityFactory.makeCamera(players.get(0), 0);
         entityFactory.makeCamera(players.get(1), 1);
