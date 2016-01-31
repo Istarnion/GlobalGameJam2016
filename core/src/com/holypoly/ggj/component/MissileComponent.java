@@ -6,7 +6,7 @@ package com.holypoly.ggj.component;
  */
 public class MissileComponent extends AbstractComponent {
 
-    public float missileSpeed = 100;
+    public float missileSpeed = 35;
 
     public float lifetime = 0.3f;
 

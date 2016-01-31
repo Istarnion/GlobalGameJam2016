@@ -79,7 +79,7 @@ public class AnimationFactory {
 
     public Animation getMagicMissile() {
         return new Animation(
-                0.05f,
+                0.1f,
                 getAnimStrip(assets.get(
                         "images/magicmissile.png",
                         Texture.class),
@@ -91,11 +91,6 @@ public class AnimationFactory {
 
     private TextureRegion[] getAnimStrip(Texture tex, int x, int y, int rows, int cols, int width, int height) {
         TextureRegion[][] temp = TextureRegion.split(tex, width, height);
-
-        System.out.println("------------");
-        System.out.println("First: "+temp.length);
-        System.out.println("Second: "+temp[0].length);
-        System.out.println("------------");
 
         TextureRegion[] strip = new TextureRegion[rows * cols];
 

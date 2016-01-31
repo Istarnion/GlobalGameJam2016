@@ -109,6 +109,7 @@ public class GraphicsSystem extends AbstractSystem {
             }
         }
         spriteBatch.end();
+
         hudBatch.setProjectionMatrix(hudCam.combined);
         hudBatch.begin();
         {
@@ -117,7 +118,7 @@ public class GraphicsSystem extends AbstractSystem {
                     100, -112.5f, -200, 225
             );
 
-            font.draw(hudBatch, ""+(String.format("%03d", (int)(game.getPurpleScore()))), 71, -100);
+            font.draw(hudBatch, ""+(String.format("%03d", (int)(game.getPurpleScore()))), 71, 100);
         }
         hudBatch.end();
 
@@ -150,6 +151,7 @@ public class GraphicsSystem extends AbstractSystem {
             }
         }
         spriteBatch.end();
+
         hudBatch.setProjectionMatrix(hudCam.combined);
         hudBatch.begin();
         {
@@ -158,10 +160,9 @@ public class GraphicsSystem extends AbstractSystem {
                     -100, -112.5f, 200, 225
             );
 
-            font.draw(hudBatch, ""+(String.format("%03d", (int)(game.getYellowScore()))), -95, -100);
+            font.draw(hudBatch, ""+(String.format("%03d", (int)(game.getYellowScore()))), -95, 100);
         }
         hudBatch.end();
-
     }
 
     public void resize(int width, int height) {

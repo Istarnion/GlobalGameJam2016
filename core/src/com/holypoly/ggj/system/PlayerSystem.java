@@ -59,8 +59,8 @@ public class PlayerSystem extends AbstractSystem {
 
             if(is.shoot && p.cooldown <= 0) {
                 Vector2 v = b.getPosition();
-                v2 = new Vector2(0, 1);
-                v2.setAngleRad(b.getAngle()+(float)Math.PI/2+MathUtils.random(-0.3f, 0.3f));
+                v2 = new Vector2(0, 1.5f);
+                v2.setAngleRad(b.getAngle()+(float)Math.PI/2+MathUtils.random(-0.2f, 0.2f));
 
                 v.add(v2);
                 game.entityFactory.makeMissile(v.x, v.y, v2.nor());
