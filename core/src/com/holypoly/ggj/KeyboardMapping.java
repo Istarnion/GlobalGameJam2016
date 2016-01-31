@@ -23,7 +23,7 @@ public class KeyboardMapping {
             turnLeft = Keys.LEFT;
             turnRight = Keys.RIGHT;
             accel = Keys.UP;
-            fire = Keys.CONTROL_RIGHT;
+            fire = Keys.ENTER;
         }
     }
 }

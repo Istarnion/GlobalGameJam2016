@@ -62,7 +62,7 @@ public class PlayerSystem extends AbstractSystem {
                 v2.setAngleRad(b.getAngle()+(float)Math.PI/2+MathUtils.random(-0.2f, 0.2f));
 
                 v.add(v2);
-                game.entityFactory.makeMissile(v.x, v.y, v2.nor());
+                game.entityFactory.makeMissile(v.x, v.y, v2.nor(), (p.entityID&1)!=0);
                 p.cooldown = p.delay;
             }
             p.cooldown -= delta;

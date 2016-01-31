@@ -81,11 +81,35 @@ public class AnimationFactory {
         return new Animation(
                 0.1f,
                 getAnimStrip(assets.get(
-                        "images/magicmissile.png",
+                        "images/spritesheet.png",
                         Texture.class),
-                        0, 0,
+                        0, 6,
                         1, 6,
-                        32, 32)
+                        24, 24)
+        );
+    }
+
+    public Animation getPurpleMissile() {
+        return new Animation(
+                0.1f,
+                getAnimStrip(assets.get(
+                        "images/spritesheet.png",
+                        Texture.class),
+                        0, 8,
+                        1, 6,
+                        24, 24)
+        );
+    }
+
+    public Animation getYellowMissile() {
+        return new Animation(
+                0.1f,
+                getAnimStrip(assets.get(
+                        "images/spritesheet.png",
+                        Texture.class),
+                        0, 7,
+                        1, 6,
+                        24, 24)
         );
     }
 

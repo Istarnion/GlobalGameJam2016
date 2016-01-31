@@ -92,9 +92,10 @@ public class EntityFactory {
         return entityCount++;
     }
 
-    public int makeMissile(float x, float y, Vector2 dir) {
+    public int makeMissile(float x, float y, Vector2 dir, boolean yellow) {
         AnimationComponent animComp = new AnimationComponent(entityCount);
-        animComp.animations.put("fire", animFactory.getMagicMissile());
+        if(yellow) animComp.animations.put("fire", animFactory.getYellowMissile());
+        else animComp.animations.put("fire", animFactory.getPurpleMissile());
         animComp.animation = animComp.animations.get("fire");
         gfxSystem.animations.add(animComp);
         physSystem.addComponent(new PhysicsComponent(entityCount, x, y, BodyDef.BodyType.DynamicBody, 1f));
