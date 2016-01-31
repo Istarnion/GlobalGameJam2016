@@ -41,14 +41,14 @@ public class BeaconSystem extends AbstractSystem {
 					//int score = (int)time*2;
 					if((players.get(j) & 1) == 0) {
 						curBeacon.captureState -= delta*20f;
-                        if(curBeacon.captureState < 25) curBeacon.caputred = 0;
-                        if(curBeacon.captureState < -25) curBeacon.caputred = -1;
+                        if(curBeacon.captureState < 25) curBeacon.captured = 0;
+                        if(curBeacon.captureState < -25) curBeacon.captured = -1;
                         if(curBeacon.captureState < -100) curBeacon.captureState = -100;
 					}
                     else {
 						curBeacon.captureState += delta*20f;
-                        if(curBeacon.captureState > -25) curBeacon.caputred = 0;
-                        if(curBeacon.captureState > 25) curBeacon.caputred = 1;
+                        if(curBeacon.captureState > -25) curBeacon.captured = 0;
+                        if(curBeacon.captureState > 25) curBeacon.captured = 1;
                         if(curBeacon.captureState > 100) curBeacon.captureState = 100;
 					}
 				}

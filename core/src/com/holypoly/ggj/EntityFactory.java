@@ -31,11 +31,15 @@ public class EntityFactory {
 
     private CameraSystem cameraSystem;
 
+    private AnimationFactory animFactory;
+    
     private int entityCount = 0;
 
     public EntityFactory(GameScreen game) {
         this.game = game;
 
+        animFactory = new AnimationFactory(game.assets);
+        
         gfxSystem = (GraphicsSystem)game.systems[game.GFX];
         physSystem = game.getPhysicsSystem();
         playerSystem = (PlayerSystem)game.systems[game.PLAYER];
@@ -43,8 +47,19 @@ public class EntityFactory {
         cameraSystem = (CameraSystem)game.systems[game.CAMERA];
     }
 
-    public int makeTest(float x, float y) {
-        gfxSystem.animations.add(new AnimationComponent(entityCount));
+    public int makePlayer(float x, float y, boolean playerOne) {
+        AnimationComponent animComp = new AnimationComponent(entityCount);
+        
+        if(playerOne) {
+            animComp.animations.put("flying", animFactory.getPurplePlayer());
+        }
+        else {
+            animComp.animations.put("flying", animFactory.getYellowPlayer());
+        }
+        
+        animComp.animation = animComp.animations.get("flying");
+        
+        gfxSystem.animations.add(animComp);
         physSystem.addComponent(new PhysicsComponent(entityCount, x, y, BodyDef.BodyType.DynamicBody, 1));
         playerSystem.pc.add(new PlayerComponent(entityCount));
 
@@ -52,7 +67,12 @@ public class EntityFactory {
     }
 
     public int makeBeacon(float x, float y) {
-        gfxSystem.animations.add(new AnimationComponent(entityCount));
+        AnimationComponent animComp = new AnimationComponent(entityCount);
+        animComp.animations.put("neutral", animFactory.getNeutralTorch());
+        animComp.animations.put("yellow", animFactory.getYellowTorch());
+        animComp.animations.put("purple", animFactory.getPurpleTorch());
+        animComp.animation = animComp.animations.get("neutral");
+        gfxSystem.animations.add(animComp);
         physSystem.addComponent(new PhysicsComponent(entityCount, x, y, BodyDef.BodyType.StaticBody, 1));
         beaconSystem.addBeaconComponent(new BeaconComponent(entityCount));
 

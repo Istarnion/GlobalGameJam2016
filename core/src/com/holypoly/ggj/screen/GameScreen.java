@@ -32,7 +32,7 @@ public class GameScreen extends AbstractScreen {
     public AbstractSystem[] systems;
 
     public AssetManager assets;
-
+    
     public EntityFactory entityFactory;
 
     public IntArray players;
@@ -41,8 +41,11 @@ public class GameScreen extends AbstractScreen {
         super(main);
 
         assets = new AssetManager();
+        assets.load("images/bg.png", Texture.class);
         assets.load("images/pentagram.png", Texture.class);
         assets.load("images/spritesheet.png", Texture.class);
+        assets.load("images/purplewitch.png", Texture.class);
+        assets.load("images/yellowwitch.png", Texture.class);
 
         players = new IntArray(4);
     }
@@ -60,9 +63,17 @@ public class GameScreen extends AbstractScreen {
 
         entityFactory = new EntityFactory(this);
 
-        players.add(entityFactory.makeTest(0, 0));
+        players.add(entityFactory.makePlayer(-10, 0, true));
+        players.add(entityFactory.makePlayer(10, 0, false));
+        
         entityFactory.makeCamera(players.get(0), 0);
+        entityFactory.makeCamera(players.get(1), 1);
+        
         entityFactory.makeBeacon(0, 50);
+        entityFactory.makeBeacon(48, 15.9f);
+        entityFactory.makeBeacon(-48, 15.9f);
+        entityFactory.makeBeacon(32f, -38.5f);
+        entityFactory.makeBeacon(-32f, -38.5f);
     }
 
     @Override

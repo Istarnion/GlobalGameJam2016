@@ -45,7 +45,7 @@ public class PlayerSystem extends AbstractSystem {
 					b.setAngularVelocity(-maxAngVel);
 				}
 			}
-			Vector2 v2 = new Vector2(1, 0);
+			Vector2 v2 = new Vector2(0, 1);
 			v2.rotateRad(b.getAngle());
 			if(is.accel){
 				b.applyForceToCenter(v2.scl(delta*moveSpeed), true);

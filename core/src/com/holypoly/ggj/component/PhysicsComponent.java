@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
  *
  * @author istarnion
  */
-public class PhysicsComponent extends Component {
+public class PhysicsComponent extends AbstractComponent {
 
     public BodyDef bodyDef;
 

@@ -4,7 +4,7 @@ package com.holypoly.ggj.component;
  *
  * @author istarnion
  */
-public class CameraComponent extends Component {
+public class CameraComponent extends AbstractComponent {
 
     public int targetID;
 

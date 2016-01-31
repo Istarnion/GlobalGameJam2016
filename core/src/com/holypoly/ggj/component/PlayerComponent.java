@@ -1,6 +1,6 @@
 package com.holypoly.ggj.component;
 
-public class PlayerComponent extends Component{
+public class PlayerComponent extends AbstractComponent{
 
 	public int team;
 	public int maxHealth;
