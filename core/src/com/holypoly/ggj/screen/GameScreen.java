@@ -1,5 +1,6 @@
 package com.holypoly.ggj.screen;
 
+import box2dLight.RayHandler;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -41,6 +42,8 @@ public class GameScreen extends AbstractScreen {
     public IntArray players;
 
     public Vector2 score = new Vector2(500, 500);
+
+    public RayHandler rayHandler;
 
     public GameScreen(Main main) {
         super(main);

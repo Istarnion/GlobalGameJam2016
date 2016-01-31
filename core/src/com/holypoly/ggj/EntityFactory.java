@@ -101,6 +101,7 @@ public class EntityFactory {
         MissileComponent mc = new MissileComponent(entityCount);
         missileSystem.missiles.add(mc);
 
+        physSystem.getBody(entityCount).setTransform(x, y, dir.angleRad()-(float)Math.PI/2.0f);
         physSystem.getBody(entityCount).setLinearVelocity(dir.scl(mc.missileSpeed));
 
         return entityCount++;
