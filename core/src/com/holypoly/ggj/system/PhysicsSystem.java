@@ -109,4 +109,14 @@ public class PhysicsSystem extends AbstractSystem {
     public World getWorld() {
         return world;
     }
+
+    public void removeEntity(int entity) {
+        if(components.containsKey(entity)) {
+
+            world.destroyBody(bodies.get(entity));
+
+            components.remove(entity);
+            bodies.remove(entity);
+        }
+    }
 }

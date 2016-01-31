@@ -1,5 +1,6 @@
 package com.holypoly.ggj.system;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.holypoly.ggj.component.InputState;
@@ -54,6 +55,18 @@ public class PlayerSystem extends AbstractSystem {
 			if(v2.len() > maxSpeed){
 				b.setLinearVelocity(v2.setLength(maxSpeed));
 			}
+
+            if(is.shoot && p.cooldown <= 0) {
+                Vector2 v = b.getPosition();
+                v2 = new Vector2(0, 1);
+                v2.setAngleRad(b.getAngle()+(float)Math.PI/2+MathUtils.random(-0.3f, 0.3f));
+
+                v.add(v2);
+                game.entityFactory.makeMissile(v.x, v.y, v2.nor());
+                p.cooldown = p.delay;
+            }
+            p.cooldown -= delta;
+            if(p.cooldown < 0) p.cooldown = 0;
 
             playerNumber++;
 		}
