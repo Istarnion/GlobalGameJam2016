@@ -1,5 +1,6 @@
 package com.holypoly.ggj.system;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.IntArray;
 import com.holypoly.ggj.component.AnimationComponent;
@@ -42,15 +43,18 @@ public class BeaconSystem extends AbstractSystem {
 				if(beaconPos.dst2(playerPos) <= curBeacon.capRad) {
 					//time += delta;
 					//int score = (int)time*2;
+					Sound sound = game.assets.get("sounds/Fire.mp3");
+					int oldState = curBeacon.captured;
 					if((players.get(j) & 1) == 0) {
 						curBeacon.captureState -= delta*20f;
                         if(curBeacon.captureState < 25) {
                             curBeacon.captured = 0;
                             AnimationComponent ac = ((GraphicsSystem)game.systems[game.GFX]).getComponent(curBeacon.entityID);
-
+                            
+                            
                             if(curBeacon.captureState < -25) {
                                 curBeacon.captured = -1;
-
+                                if(oldState != curBeacon.captured) sound.play(1f);
                                 ac.animation = ac.animations.get("purple");
                             }
                             else {
@@ -61,13 +65,14 @@ public class BeaconSystem extends AbstractSystem {
 					}
                     else {
 						curBeacon.captureState += delta*20f;
+						
                         if(curBeacon.captureState > -25) {
                             curBeacon.captured = 0;
                             AnimationComponent ac = ((GraphicsSystem)game.systems[game.GFX]).getComponent(curBeacon.entityID);
-
+                            
                             if(curBeacon.captureState > 25) {
                                 curBeacon.captured = 1;
-
+                                if(oldState != curBeacon.captured) sound.play(1f);
                                 ac.animation = ac.animations.get("yellow");
                             }
                             else {
